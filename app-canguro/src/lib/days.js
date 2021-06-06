@@ -40,6 +40,7 @@ export const dayTime = [
     {
         id: 'morning',
         timeName: 'Mañana',
+        days: [],
         // hoursPrice: '',
         // startHour: '',
         // finishHour: '',
@@ -47,6 +48,7 @@ export const dayTime = [
     {
         id: 'afternoon',
         timeName: 'Tarde',
+        days: [],
         // hoursPrice: '',
         // startHour: '',
         // finishHour: '',
@@ -54,6 +56,7 @@ export const dayTime = [
     {
         id: 'night',
         timeName: 'Noche',
+        days: [],
         // hoursPrice: '',
         // startHour: '',
         // finishHour: '',

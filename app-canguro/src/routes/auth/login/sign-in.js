@@ -1,5 +1,5 @@
 import {connectToDatabase} from '$lib/db';
-import {sign} from 'jsonwebtoken';
+import * as jwt from 'jsonwebtoken';
 import * as cookie from 'cookie';
 
 const DATABASE_NAME = import.meta.env.VITE_DB_NAME;
@@ -17,20 +17,20 @@ export async function post(request){
             body: {error: "Email o contraseña incorrectos"}
         }
     }
-    const jwt = sign({
+    const jwtToken = jwt.sign({
         user: user,
     },TOKEN_KEY);
 
     return {
         headers:{
-            "Set-Cookie": cookie.serialize('jwt',jwt,{
+            "Set-Cookie": cookie.serialize('jwt',jwtToken,{
                 maxAge: 60*60*2+3600,
                 httpOnly: true,
                 path: "/"
             }),
             'Content-Type' : 'application/json',
         },
-        body: {jwt: jwt},
+        body: {jwt: jwtToken},
         status: 200,
     }
 }

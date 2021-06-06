@@ -1,78 +1,60 @@
-<script>
-	import { onMount } from 'svelte';
-	let users = [];
-	onMount(() => {});
-
-	async function list() {
-		const response = await fetch('/api/user/list', {
-			method: 'GET',
-			headers: {
-				'Content-Type': 'application/json'
-			}
-			//body: JSON.stringify(offerForm),
-		});
-		let result = await response.json();
-		return result;
+<script context="module">
+	export async function load({ fetch, session }) {
+		const response = await fetch('/api/user/list');
+		if (response.ok) {
+			const data = await response.json();
+			return {
+				status: 200,
+				props: {
+					data: data,
+					currentUser: session.user
+				}
+			};
+		}
 	}
-	async function deleteUser(user) {
-		console.log('delete user ' + user);
-        const response = await fetch('/api/user/del', {
-			method: 'DELETE',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(user),
-		});
-		let result = await response.json();        
-        console.log(result)
-        users = users.filter(u => user._id !== u._id)
-        //loadLIst();
-	}
-	async function deleteOffer(user) {
-		console.log('delete user ' + user);
-	}
-	function loadLIst() {
-		list().then(
-			(res) => {
-				users = res;
-				console.log(res);
-			},
-			(err) => {
-				console.log(err);
-			}
-		);
-	}
-	loadLIst();
 </script>
 
-<h1>admin</h1>
-<h3>Users</h3>
-<table>
-	<tr>
-		<th>name</th>
-		<th>email</th>
-		<th>action</th>
-	</tr>
-	{#each users as user}
-		<tr>
-			<td>{user.name}</td>
-			<td>{user.email}</td>
-			<td><button on:click={deleteUser(user)}>tocame please</button></td>
-		</tr>
-	{/each}
-</table>
-<h3>offer</h3>
-<table>
-	<tr>
-		<th>name</th>
-		<th>email</th>
-		<th>action</th>
-	</tr>
-	{#each users as user}
-		<tr>
-			<td>{user.name}</td>
-			<td>{user.email}</td>
-			<td><button on:click={deleteUser(user)}>tocame please</button></td>
-		</tr>
-	{/each}
-</table>
+<script>
+	import UserTable from '$lib/components/UserTable.svelte';
+	import OfferTable from '$lib/components/OfferTable.svelte';
+
+	export let data;
+	export let currentUser;
+	async function getUsers() {
+		listUsers = true;
+		const response = await fetch('/api/user/list');
+		if (response.ok) {
+			data = await response.json();
+		}
+	}
+	async function getOffers() {
+		listUsers = false;
+		const response = await fetch('/api/offer/list');
+		if (response.ok) {
+			data = await response.json();
+		}
+	}
+	let listUsers = true;
+</script>
+
+<svelte:head>
+	<title>Panel de administración</title>
+</svelte:head>
+
+<article
+	class="card col-span-1 row-span-3 shadow-lg p-4  bg-base-100 m-auto justify-center flex flex-col"
+>
+	<div class="card w-full">
+		<div class="btn-group m-auto">
+			<button class="btn btn-lg" class:btn-active={listUsers} on:click={getUsers}>Usuarios</button>
+			<button class="btn btn-lg" class:btn-active={!listUsers} on:click={getOffers}>Ofertas</button>
+		</div>
+	</div>
+	<div class="overflow-x-auto mt-4">
+		{#if listUsers}
+			<UserTable bind:data />
+		{:else}
+			<OfferTable bind:data />
+		{/if}
+	</div>
+</article>

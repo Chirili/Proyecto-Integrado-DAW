@@ -15,11 +15,11 @@
 	}
 </script>
 <script>
-	import { days, dayTime } from './_days';
+	import { days, dayTime } from '$lib/days';
 	export let user;
 	let offerForm = {
 		title: '',
-		userId: user.user._id,
+		user: user.user,
 		description: '',
 		hours: [],
 		hoursPrice: '',

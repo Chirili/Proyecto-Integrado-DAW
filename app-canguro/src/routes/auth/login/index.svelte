@@ -16,4 +16,13 @@
         window.location = "/";
     }
 </script>
-<AuthForm on:successLogin="{handleLoginSuccess}"></AuthForm>
+<svelte:head>
+    <title>CyB Login</title>
+</svelte:head>
+<main class="m-auto">
+        <AuthForm on:successLogin="{handleLoginSuccess}">
+            <svelte:fragment slot="formTitle">
+                <h1 class="card-title text-4xl text-base-content">Formulario de inicio de sesión</h1>
+            </svelte:fragment>
+        </AuthForm>
+</main>
