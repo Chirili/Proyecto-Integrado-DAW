@@ -17,19 +17,19 @@
 </script>
 <article class="flex flex-col bg-base-200 absolute h-full w-full text-base-content" data-theme="dark">
 	<header class="z-20">
-		<nav class="navbar bg-neutral shadow-2xl text-neutral-content overscroll-none">
-			<div class="flex-none flex-grow px-2 mx-2">
+		<nav class="navbar bg-neutral shadow-2xl text-neutral-content flex-col sm:flex-row overscroll-none">
+			<div class="flex-none flex-grow px-2 mx-2 flex-wrap">
 				<a href="/" class="btn btn-ghost">
 					<span class="text-lg font-bold"> CyB </span>
 				</a>
 			</div>
-			<div class="flex-none">
+			<div class="">
 				<a href="/offer/list" class="btn btn-ghost" class:bg-neutral-focus={currentPage === 'main'}
 					>Buscar ofertas</a
 				>
 			</div>
 			{#if !isAuthenticated}
-				<div class="flex-none">
+				<div>
 					<a
 						href="/auth/login"
 						class="btn btn-ghost"
@@ -39,7 +39,7 @@
 				</div>
 			{/if}
 			{#if !isAuthenticated}
-				<div class="flex-none">
+				<div class="">
 					<a
 						href="/auth/register"
 						class="btn btn-ghost"
@@ -48,12 +48,12 @@
 				</div>
 			{/if}
 			{#if isAuthenticated}
-			<div class="flex-none">
+			<div class="">
 				<a href="/offer/create" class="btn btn-primary" class:bg-neutral-focus={currentPage === 'main'}
 					>Crear oferta</a
 				>
 			</div>
-			<div class="dropdown dropdown-end flex-none relative">
+			<div class="dropdown dropdown-end  relative">
 				<div tabindex="0" class="m-1 btn">{user.user.name}</div> 
 				<ul class="shadow menu dropdown-content bg-base-100 rounded-box w-52 absolute top-full">
 				  <li>
@@ -69,7 +69,7 @@
 			  </div>
 			{/if}
 			{#if isAuthenticated}
-			  <div class="flex-none">
+			  <div class="">
 				<a href="/auth/logout" class="btn btn-ghost">Cerrar sesión</a>
 			  </div>
 			{/if}

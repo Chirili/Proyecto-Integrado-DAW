@@ -8,7 +8,6 @@
     function setInputType(node){
         node.type = type;
         if(type === 'date'){
-            console.log(node);
         }
     }
   </script>

@@ -18,7 +18,7 @@
 <article class="self-center h-full w-full px-4 m-5">
     <header class="flex flex-row justify-between">
         {#if offers.length > 0}
-            <div class="stats shadow">
+            <div class="stats shadow m-auto">
                 <div class="stat">
                   <div class="stat-title">Ofertas encontradas</div> 
                   <div class="stat-value">{offers.length}</div> 

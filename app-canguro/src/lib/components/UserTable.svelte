@@ -13,7 +13,6 @@
 				body: JSON.stringify(user)
 			});
 			let result = await response.json();
-            console.log(result);
 		    data = data.filter((u) => user._id !== u._id);
 		}
 	}
