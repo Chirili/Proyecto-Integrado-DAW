@@ -1,3 +1,3 @@
 # Proyecto-Integrado-DAW
 
-# Proyecto hecho integramente con SvelteKit, Nodejs y MongoDB
+### Proyecto functionando con Svelte-Kit, Nodejs y Mongodb
